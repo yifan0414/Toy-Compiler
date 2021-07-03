@@ -20,6 +20,8 @@ def trans():
         "*":["运算","IMUL"],
         "/":["运算",""],
         "j":["转移","JMP"],
+        "PRINT":["输出",""],
+        "SCANF":["输入",""],
     }
     #print("error : 翻译错误")
 
@@ -27,6 +29,7 @@ def trans():
     for line in four:
         if rule[line[0]][0] == "判断":
             t += [n+1]
+            t += [line[3]]
         elif rule[line[0]][0] == "转移":
             t +=[n+1]
             t += [line[3]]
@@ -89,6 +92,14 @@ def trans():
         elif rule[four[i][0]][0] == "转移":
             result +=[tab+"JMP "+str(four_in[four[i][3]])]
             result +=[""]
+        elif rule[four[i][0]][0] == "输出":
+            result +=[tab+"MOV DL,DS:["+str(2*data.index(four[i][1])) + "]"]
+            result +=[tab+"MOV AH,2"]
+            result +=[tab+"INT 21h"]
+        elif rule[four[i][0]][0] == "输入":
+            result +=[tab+"MOV AH 1"]
+            result +=[tab+"INT 21h"]
+            result +=[tab+"MOV DS:["+str(2*data.index(four[i][1])) + "], AH"]
     result += [""]
     result += ["CODE"+str(m-1)+":"]
     result += [tab+"MOV AX,4c00"]

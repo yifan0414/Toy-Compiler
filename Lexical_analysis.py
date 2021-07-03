@@ -17,7 +17,8 @@ KEYWORD_LIST = [
     "return",
     "void",
     "printf"
-    "scanf"
+    "scanf",
+    "do"
 ]
 
 SEPARATOR_LIST = ["{", "}", "[", "]", "(", ")", "~", ",", ";", ".", "?", ":"]

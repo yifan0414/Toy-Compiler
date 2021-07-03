@@ -1,32 +1,32 @@
 import Parser
 
 global Parser_r1, Parser_r2,temp,four
-
 def goon(a):
     global Parser_r1, Parser_r2, temp
     print()
     print(Parser_r1)
     print(Parser_r2)
     print(temp)
-    if a ==1:
+    if a == 1: # 对应非终结符，进入下一个产生式
         b = Parser_r1[0]
-        str1 = "fun_"+str(b)+"()"
+        str1 = "fun_" + str(b) + "()"
         return eval(str1)
-    else:
-        temp +=[ Parser_r2[0]]
-        t =[ Parser_r2[0]]
+    else: # 目前匹配的符号，终结符
+        temp += [ Parser_r2[0]]
+        t = [ Parser_r2[0]]
         Parser_r2 = Parser_r2[1:]
         return  t
+
 
 def fun_0():
     global Parser_r1, Parser_r2,temp
     Parser_r1 = Parser_r1[1:]
-    goon(1)
-    goon(1)
+    goon(1) # 数据类型
+    goon(1) # 标识符
     goon(2)
     goon(2)
     goon(2)
-    goon(1)
+    goon(1) # 语句列表
     goon(2)
     temp = temp[:-7]
     temp += []
@@ -46,6 +46,7 @@ def fun_2():
     global Parser_r1, Parser_r2, temp
     Parser_r1 = Parser_r1[1:]
     goon(2)
+    # print("fun_2:", temp)
     return 0
 
 def fun_3():
@@ -58,6 +59,7 @@ def fun_4():
     global Parser_r1, Parser_r2, temp
     Parser_r1 = Parser_r1[1:]
     goon(2)
+    # print("fun_2:", temp)
     return 0
 
 def fun_5():
@@ -124,7 +126,6 @@ def fun_12():
     temp = temp[:-1]
     temp += [("语句", -1, -1)]
     return 0
-
 def fun_13():
     global Parser_r1, Parser_r2, temp
     Parser_r1 = Parser_r1[1:]
@@ -187,6 +188,7 @@ def fun_20():
     temp += [("赋值语句1", -1, -1)]
     return 0
 
+# < 赋值语句2 > ::= <=> <表达式>
 def fun_21():
     global Parser_r1, Parser_r2, temp,four
     Parser_r1 = Parser_r1[1:]
@@ -196,11 +198,11 @@ def fun_21():
     if temp[-2][1] == "=":
         print(("=",temp[-1][1],"_",temp[-3][1]))
         four +=[("=",temp[-1][1],"_",temp[-3][1])]
+        # 对于a = b + c 来说，temp[-1][1] = b+c, temp[-3][1] = a
     else:
         print(("=", temp[-1][1], "_", temp[-2][1]))
         four += [("=", temp[-1][1], "_", temp[-2][1])]
-   # print((temp[-2][1],temp[-1][1],"_",temp[-3][1]))
-   # four += [(temp[-2][1],temp[-1][1],"_",temp[-3][1])]
+        # 对于 a = 10来说，temp[-1][1] = 10, temp[-2][1] = a
     temp = temp[:-2]
     temp += [("赋值语句2", -1, -1)]
     return 0
@@ -221,6 +223,7 @@ def fun_23():
     four += [("-",temp[-2][1],1,temp[-2][1])]
     return 0
 
+# < 赋值语句2> ::=<OP><表达式>
 def fun_24():
     global Parser_r1, Parser_r2,temp,four,ntemp
     Parser_r1 = Parser_r1[1:]
@@ -260,6 +263,7 @@ def fun_25():
     temp = temp[:-1]
     return 0
 
+# <运算符1>::=<运算符><右项>
 def fun_26():
     global Parser_r1, Parser_r2, temp ,ntemp ,four
     Parser_r1 = Parser_r1[1:]
@@ -340,9 +344,9 @@ def fun_36():
     Parser_r1 = Parser_r1[1:]
     goon(2)
     return 0
-
+# < 条件语句 > ::= <if ><(> <条件式> <)><{> < 语句列表 ><}><条件语句2>
 def fun_37():
-    global Parser_r1, Parser_r2, temp,ntemp,four
+    global Parser_r1, Parser_r2, temp, ntemp, four
     Parser_r1 = Parser_r1[1:]
     goon(2)
     goon(2)
@@ -354,7 +358,7 @@ def fun_37():
     goon(2)
     goon(1)
     four += [("j","_","_","to")]
-    four[k-1] = (four[k-1][0],four[k-1][1],four[k-1][2],len(four))
+    four[k - 1] = (four[k-1][0], four[k-1][1], four[k-1][2], len(four))
     k = len(four)
     goon(2)
     goon(1)
@@ -396,7 +400,7 @@ def fun_41():
     Parser_r1 = Parser_r1[1:]
     goon(1)
     return 0
-
+# < for循环 > ::= <for><(> <赋值语句><;><条件式> <;><赋值语句> <)><{>< 语句列表 ><}>
 def fun_42():
     global Parser_r1, Parser_r2, temp, ntemp, four
     Parser_r1 = Parser_r1[1:]
@@ -421,6 +425,7 @@ def fun_42():
     temp += [("for循环", -1, -1)]
     return 0
 
+# < while循环 > ::= <while> <( ><条件式> <)> <{>< 语句列表 ><}>
 def fun_43():
     global Parser_r1, Parser_r2, temp, ntemp, four
     Parser_r1 = Parser_r1[1:]
@@ -428,14 +433,15 @@ def fun_43():
     goon(2)
     goon(2)
     goon(1)
-    print(("j==",temp[-1][1],0,""))
-    four += [("j==",temp[-1][1],0,"")]
+    print(("j==", temp[-1][1], 0, ""))
+    four += [("j==", temp[-1][1], 0, "")] # 这里写如果为假的跳转四元式，跳转标号暂定
     k = len(four)
     goon(2)
     goon(2)
     goon(1)
     goon(2)
     four += [("j", "_", "_", n_start_for)]
+    # 这里写之前为假的跳转四元式的跳转标号
     four[k - 1] = (four[k - 1][0], four[k - 1][1], four[k - 1][2], len(four))
     temp = temp[:-7]
     temp += [("while循环", -1, -1)]
@@ -477,7 +483,30 @@ def fun_46():
     temp=temp[:-1]
     temp[-1] = [temp[-1][0],-temp[-1][1],temp[-1][2]]
     return 0
-
+def fun_47():
+    global Parser_r1, Parser_r2, temp
+    Parser_r1 = Parser_r1[1:]
+    goon(1)
+    temp = temp[:-1]
+    temp += [("语句", -1, -1)]
+    return 0
+def fun_48():
+    global Parser_r1, Parser_r2, temp, four
+    Parser_r1 = Parser_r1[1:]
+    n_start_for = len(four)
+    goon(2)     # do
+    goon(2)     # {
+    goon(1)     # 语句列表
+    goon(2)     # }
+    goon(2)     # while
+    goon(2)     # {
+    goon(1)     # 条件式
+    print(("j==", temp[-1][1], 1, ""))
+    four += [("j==", temp[-1][1], 1, n_start_for)]  # 这里写如果为真的跳转四元式，跳转标号暂定
+    goon(2)     # }
+    goon(2)     # ;
+    temp = temp[:-9]
+    temp += [("dowhile", -1, -1)]
 def main():
     global temp, Parser_r1, Parser_r2 ,ntemp,four
     four ,temp = [],[]
@@ -490,8 +519,11 @@ def main():
     print(temp)
 
     print("********************    四 元 式   *********************")
+    count = 0
     for i in four:
+        print(count, end="\t")
         print(i)
+        count = count + 1
     return four
 
 if __name__ == "__main__":

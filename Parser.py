@@ -3,10 +3,6 @@ import numpy as np
 from prettytable import PrettyTable
 import Lexical_analysis
 
-
-
-
-
 def read_source_file(file) :
     global grammer
     f = open(file, "r",encoding="UTF-8")
@@ -253,7 +249,7 @@ def analysis():
             a =str(int( LL_1Table[nterminal.index(stack_1[-1])][terminal.index(str1)-1]))
             print(stack_1)
             print(stack_2)
-            print("根据产生式 " + a+" 代入")
+            print("根据产生式 " + a + " 代入")
             analysis_result += [a]
             print()
             a = LL_1Table[nterminal.index(stack_1[-1])][terminal.index(str1)-1]
