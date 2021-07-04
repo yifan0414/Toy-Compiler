@@ -1,9 +1,9 @@
 int main(){
     int b = 2;
     int a = 1;
-    scanf("%d", a);
-    do {
-        a++;
-    }while(a<4);
+    switch(a){
+        case 1: b = 3; break;
+        case 2: b = 5; break;
+    }
     printf("%d", a);
 }

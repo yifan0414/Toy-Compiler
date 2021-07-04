@@ -13,6 +13,7 @@ def trans():
         "j<=":["判断","JNG"],
         "j<":["判断","JL"],
         "j>=":["判断","JNL"],
+        "j!=":["判断","JNE"],
         "%":["运算",""],
         "=":["赋值","MOV"],
         "+":["运算","ADD"],
@@ -87,7 +88,7 @@ def trans():
             else:
                 result +=["----运算符未定义---"]
             data[data.index(-1)] = four[i][3]
-            result += [tab+"MOV AX,DS:["+str(2*data.index(four[i][3]))+"]"]
+            result += [tab+"MOV DS:["+str(2*data.index(four[i][3]))+"],AX"]
 
         elif rule[four[i][0]][0] == "转移":
             result +=[tab+"JMP "+str(four_in[four[i][3]])]
@@ -99,9 +100,9 @@ def trans():
         elif rule[four[i][0]][0] == "输入":
             result +=[tab+"MOV AH 1"]
             result +=[tab+"INT 21h"]
-            result +=[tab+"MOV DS:["+str(2*data.index(four[i][1])) + "], AH"]
+            result +=[tab+"MOV DS:["+str(2*data.index(four[i][1])) + "], AL"]
     result += [""]
-    result += ["CODE"+str(m-1)+":"]
+    result += ["CODE"+str(m)+":"]
     result += [tab+"MOV AX,4c00"]
     result += [tab+"INT 21"]
     result += ["CODE ENDS"]

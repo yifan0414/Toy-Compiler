@@ -128,7 +128,7 @@ def getSelect():
                 first[i]+=["空"]
             else:
                 select[a] += first[i]
-                break;
+                break
         if b == len(line)-1 and "空" in first[line[-1]]:
             select[a] += follow[line[0]]
             select[a] = list(set(select[a]))
@@ -151,11 +151,11 @@ def getLL_1Table():
     nterminal = list(set(nterminal))
     nterminal.remove("空")
     terminal += ("#")
-    LL_1Table = -np.ones((len(nterminal),len(terminal)))
+    LL_1Table = np.zeros((len(nterminal),len(terminal)))
     k = int(0)
     for line in select:
         for i in select[line]:
-            if LL_1Table[nterminal.index(grammer[k][0])][terminal.index(i)] == -1:
+            if LL_1Table[nterminal.index(grammer[k][0])][terminal.index(i)] == 0:
                 LL_1Table[nterminal.index(grammer[k][0])][terminal.index(i)] = k
             else:
                 print("error：文法错误")

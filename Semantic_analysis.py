@@ -1,6 +1,6 @@
 import Parser
 
-global Parser_r1, Parser_r2,temp,four
+global Parser_r1, Parser_r2,temp,four,key
 def goon(a):
     global Parser_r1, Parser_r2, temp
     print()
@@ -344,6 +344,7 @@ def fun_36():
     Parser_r1 = Parser_r1[1:]
     goon(2)
     return 0
+
 # < 条件语句 > ::= <if ><(> <条件式> <)><{> < 语句列表 ><}><条件语句2>
 def fun_37():
     global Parser_r1, Parser_r2, temp, ntemp, four
@@ -373,6 +374,7 @@ def fun_38():
     temp += [temp[-1]]
     return 0
 
+# < 条件语句2 > ::= <else> <{>< 语句列表 ><}>
 def fun_39():
     global Parser_r1, Parser_r2, temp,four
     Parser_r1 = Parser_r1[1:]
@@ -507,8 +509,65 @@ def fun_48():
     goon(2)     # ;
     temp = temp[:-9]
     temp += [("dowhile", -1, -1)]
+def fun_49():
+    global Parser_r1, Parser_r2, temp
+    Parser_r1 = Parser_r1[1:]
+    goon(1)
+    temp = temp[:-1]
+    temp += [("语句", -1, -1)]
+def fun_50():
+    global Parser_r1, Parser_r2, temp, key ,four
+    Parser_r1 = Parser_r1[1:]
+    goon(2)
+    goon(2)
+    key = Parser_r2[0][1]
+    goon(1)
+    goon(2)
+    goon(2)
+    goon(1)
+    goon(2)
+    # 回填出口，
+    l = len(four)
+    for i in range(l):
+        if four[i][3] == "to":
+            four[i] = [four[i][0], four[i][1],four[i][2], l]
+    temp = temp[:-7]
+    temp += [("switch语句", -1, -1)]
+def fun_51():
+    global Parser_r1, Parser_r2, temp, four, key
+    Parser_r1 = Parser_r1[1:]
+    goon(2)
+    const = Parser_r2[0][1] # 常量
+    goon(1)
+    print(("j!=", key, const, "to"))
+    four += [("j!=", key, const, "to")]
+    k = len(four)
+    goon(2)
+    goon(1)
+    # 寻找j!=在四元式中的位置
+    four[k - 1] = (four[k - 1][0], four[k - 1][1], four[k - 1][2], len(four))
+    goon(1)
+def fun_52():
+    global Parser_r1, Parser_r2, temp, four
+    Parser_r1 = Parser_r1[1:]
+
+def fun_53():
+    global Parser_r1, Parser_r2, temp, four
+    Parser_r1 = Parser_r1[1:]
+    goon(2)
+    goon(2)
+    four += [("j", "_", "_", "to")]
+    temp = temp[:-2]
+    temp += [("break语句",-1,-1)]
+def fun_54():
+    global Parser_r1, Parser_r2, temp
+    Parser_r1 = Parser_r1[1:]
+    goon(1)
+    temp = temp[:-1]
+    temp += [("语句", -1, -1)]
+    return 0
 def main():
-    global temp, Parser_r1, Parser_r2 ,ntemp,four
+    global temp, Parser_r1, Parser_r2 ,ntemp, four
     four ,temp = [],[]
     ntemp = 0
     Parser_r1,Parser_r2 = Parser.main()

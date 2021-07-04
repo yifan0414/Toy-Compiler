@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531b1a14-2db4-4445-bb81-4e79f3e14535" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Compiler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Compiler.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="531b1a14-2db4-4445-bb81-4e79f3e14535" name="Default" comment="完成输入输出语句，以及dowhile循环">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/123.txt" beforeDir="false" afterPath="$PROJECT_DIR$/123.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Code.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lexical_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lexical_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Semantic_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Semantic_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Trans_to_assembly.py" beforeDir="false" afterPath="$PROJECT_DIR$/Trans_to_assembly.py" afterDir="false" />
@@ -236,8 +231,18 @@
       <workItem from="1623303465799" duration="2053000" />
       <workItem from="1623335446309" duration="458000" />
       <workItem from="1625311711354" duration="3327000" />
-      <workItem from="1625315351912" duration="13675000" />
+      <workItem from="1625315351912" duration="14067000" />
+      <workItem from="1625339298721" duration="6181000" />
+      <workItem from="1625371291810" duration="3235000" />
     </task>
+    <task id="LOCAL-00001" summary="完成输入输出语句，以及dowhile循环">
+      <created>1625338906332</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1625338906332</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -290,6 +295,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="完成输入输出语句，以及dowhile循环" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成输入输出语句，以及dowhile循环" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -300,18 +309,33 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Semantic_analysis.py</url>
-          <line>404</line>
+          <line>406</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Semantic_analysis.py</url>
-          <line>349</line>
+          <line>350</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Trans_to_assembly.py</url>
-          <line>94</line>
+          <line>95</line>
           <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Trans_to_assembly.py</url>
+          <line>54</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Trans_to_assembly.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Semantic_analysis.py</url>
+          <line>529</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -324,15 +348,20 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
+        <watch expression="temp" language="Python" />
+        <watch expression="four" language="Python" />
         <watch expression="result" language="Python" />
+        <watch expression="four[i]" language="Python" />
+        <watch expression="Parser_r1" language="Python" />
+        <watch expression="four[i][3]" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Compiler$Trans_to_assembly.coverage" NAME="Trans_to_assembly Coverage Results" MODIFIED="1625338250619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Compiler$Semantic_analysis.coverage" NAME="Semantic_analysis Coverage Results" MODIFIED="1625313448071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Compiler$Parser.coverage" NAME="Parser Coverage Results" MODIFIED="1625313415331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Compiler$Lexical_analysis.coverage" NAME="Lexical_analysis Coverage Results" MODIFIED="1625313327786" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Compiler$Trans_to_assembly.coverage" NAME="Trans_to_assembly Coverage Results" MODIFIED="1625374524357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Compiler$Semantic_analysis.coverage" NAME="Semantic_analysis Coverage Results" MODIFIED="1625371820786" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Compiler$Parser.coverage" NAME="Parser Coverage Results" MODIFIED="1625345255609" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Compiler$Lexical_analysis.coverage" NAME="Lexical_analysis Coverage Results" MODIFIED="1625340586989" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Lexical_analysis.py">
