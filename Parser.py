@@ -18,8 +18,8 @@ def read_source_file(file) :
                 continue
             if i == ">":
                 list += [str.strip()]
-                #if isterminal(str.strip()):
-                    #print(str.strip())
+                # if isterminal(str.strip()):
+                    # print(str.strip())
             str += i
         grammer[count]=list
         count += 1

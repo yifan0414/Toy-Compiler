@@ -18,7 +18,10 @@ KEYWORD_LIST = [
     "void",
     "printf"
     "scanf",
-    "do"
+    "do",
+    "int26",
+    "struct",
+    "char*"
 ]
 
 SEPARATOR_LIST = ["{", "}", "[", "]", "(", ")", "~", ",", ";", ".", "?", ":"]
@@ -114,6 +117,11 @@ CATEGORY_DICT = {
     "OP":74,
     "printf":75,
     "scanf":76,
+    "int26":77,
+    "struct":88,
+    ".":89,
+    "structID":90,
+    "char*":91
 }
 
 current_row = -1
@@ -166,6 +174,7 @@ def read_source_file(file):
     global input_str
     f = open(file, "r")
     input_str = f.readlines()
+    input_str = input_str[1:]
     f.close()
 
 
@@ -199,10 +208,10 @@ def scanner():
             float_value += current_char
             current_char = getchar()
         ungetc()
-        return ("FLOAT", float_value, get_cate_id("FLOAT"))
-    if current_char.isalpha() or current_char == "_":
+        return ("FLOAT", int(eval(float_value)), get_cate_id("FLOAT"))
+    if current_char.isalpha() or current_char == "_" or current_char == "." or current_char == "*":
         string = ""
-        while current_char.isalpha() or current_char.isdigit() or current_char == "_":
+        while current_char.isalpha() or current_char.isdigit() or current_char == "_"or current_char == "." or current_char == "*":
             string += current_char
             current_char = getchar()
             if current_char == "SCANEOF":
@@ -211,8 +220,14 @@ def scanner():
         ungetc()
         if is_keyword(string):
             return (string, "", get_cate_id(string))
+        elif result[-1][0] == "struct": # a.b
+            return ("structID", string, get_cate_id("structID"))
         else:
-            return ("ID", string, get_cate_id("ID"))
+            for i in result:
+                if i[0] == "structID":
+                    if i[1] == string:
+                        return ("structID", string, get_cate_id("structID"))
+            return ("ID", string.replace('.',''), get_cate_id("ID"))
 
     if current_char == '"':
         str_literal = ""
@@ -254,6 +269,9 @@ def scanner():
                         return ("SCANEOF", "", "")
                 comment += next_char
                 next_char = getchar()
+        elif next_char == "/":
+            current_row = len(input_str[current_line]) - 1
+            return None
         else:
             ungetc()
             op = current_char
@@ -291,6 +309,8 @@ def main( ):
                 break
             result += [r]
     result += ["#"]
+    print(result)
+
     return result
 
 if __name__ == "__main__":

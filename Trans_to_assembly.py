@@ -13,44 +13,63 @@ def trans():
         "j<=":["判断","JNG"],
         "j<":["判断","JL"],
         "j>=":["判断","JNL"],
-        "j!=":["判断","JNE"],
         "%":["运算",""],
         "=":["赋值","MOV"],
         "+":["运算","ADD"],
         "-":["运算","SUB"],
         "*":["运算","IMUL"],
-        "/":["运算",""],
+        "/":["运算","IDIV"],
         "j":["转移","JMP"],
+        "j!=":["判断","JNE"],
         "PRINT":["输出",""],
         "SCANF":["输入",""],
+
     }
     #print("error : 翻译错误")
+
+
+    tab =  "        "
+    result +=[("include io.inc")]
+    result += [(".model small")]
+    result += [(".stack")]
+    result += [(".data")]
+    result += [(tab + "DW 100 DUP(0)")]
+    const = []
+    temp = []
+    for i in range(len(four)):
+        if four[i][2] == "常量":
+            result += [(four[i][3] + "\tDB " + "'" +four[i][1] + "',13,10,'$'")]
+            const += [four[i][3]]
+            temp += [i] # 保存所有为常量的四元式
+    # 删除为字符串常量的四元式
+    # for i in temp:
+    #     four.pop(i)
+    result += [(".code")]
+    result += [(".startup")]
+
+    count = 0
+    for i in four:
+        print(count, end="\t")
+        print(i)
+        count = count + 1
 
     n = 0
     for line in four:
         if rule[line[0]][0] == "判断":
-            t += [n+1]
+            t += [n + 1]
             t += [line[3]]
         elif rule[line[0]][0] == "转移":
-            t +=[n+1]
+            t += [n + 1]
             t += [line[3]]
-        n = n+1
+        n = n + 1
     t = list(set(t))
     t.sort()
-    four_in ={}
+    four_in = {}
     m = 1
     for i in t:
-        four_in[i] = "CODE"+str(m)
-        m+=1
+        four_in[i] = "CODE" + str(m)
+        m += 1
     print(four_in)
-
-    tab =  "        "
-    result += [("ASSUME CS:CODE,DS:DATA")]
-    result += [("DATA SEGMENT")]
-    result += [(tab+"DW 100 DUP(0)")]
-    result += [("DATA ENDS")]
-    result += [("CODE SEGMENT")]
-    result += [("START:")]
 
     for i in range(len(four)):
         if i in four_in:
@@ -62,7 +81,9 @@ def trans():
             result+=[tab+""+rule[four[i][0]][1]+" "+four_in[four[i][3]]]
             result+=[""]
         elif rule[four[i][0]][0] == "赋值":
-            if isinstance(four[i][1],int) or isinstance(four[i][1],float):
+            if four[i][2] == "常量":
+                continue
+            elif isinstance(four[i][1],int) or isinstance(four[i][1],float):
                 data[data.index(-1)] = four[i][3]
                 result += [tab+"MOV AX,"+ str(four[i][1])]
                 result += [tab+"MOV DS:["+str(2*data.index(four[i][3]))+"],AX"]
@@ -94,21 +115,35 @@ def trans():
             result +=[tab+"JMP "+str(four_in[four[i][3]])]
             result +=[""]
         elif rule[four[i][0]][0] == "输出":
-            result +=[tab+"MOV DL,DS:["+str(2*data.index(four[i][1])) + "]"]
-            result +=[tab+"MOV AH,2"]
-            result +=[tab+"INT 21h"]
+            if four[i][1] in const:
+                result += [tab+"MOV DX,OFFSET " + four[i][1]]
+                result += [tab+"MOV AH,9"]
+                result += [tab+"INT 21H"]
+            else:
+                # result +=[tab+"MOV AX,DS:["+str(2*data.index(four[i][1])) + "]"]
+                # result +=[tab+"ADD AX,30H"]
+                # result += [tab + "MOV DX,AX"]
+                # result +=[tab+"MOV AH,2"]
+                # result +=[tab+"INT 21h"]
+                #result += [tab + "mov ax,dx"]
+                result += [tab + "MOV AX,DS:[" + str(2 * data.index(four[i][1])) + "]"]
+                result += [tab + "call dispuib"]
+                result += [tab + "call dispcrlf"]
         elif rule[four[i][0]][0] == "输入":
-            result +=[tab+"MOV AH 1"]
-            result +=[tab+"INT 21h"]
-            result +=[tab+"MOV DS:["+str(2*data.index(four[i][1])) + "], AL"]
+            result +=[tab+"call readuiw"]
+            #result +=[tab+"MOV AH,1"]
+            #result +=[tab+"INT 21h"]
+            result +=[tab+"MOV DS:["+str(2*data.index(four[i][1])) + "], AX"]
     result += [""]
     result += ["CODE"+str(m)+":"]
-    result += [tab+"MOV AX,4c00"]
-    result += [tab+"INT 21"]
-    result += ["CODE ENDS"]
+    # result += [tab+"MOV AX,4c00"]
+    # result += [tab+"INT 21h"]
+    # result += ["CODE ENDS"]
+    result += [".exit"]
     result += ["END"]
+    f = open('asm.txt','w')
     for line in result:
-        print(line)
+        f.write(line + '\n')
 
 def main():
     global four
