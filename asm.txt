@@ -3,9 +3,9 @@ include io.inc
 .stack
 .data
         DW 100 DUP(0)
-Suname	DB 'yi fan',13,10,'$'
-Sucollege	DB 'GXU',13,10,'$'
-Sumajor	DB 'CS',13,10,'$'
+Suname	DB 'yi fan GG',13,10,'$'
+Sucollege	DB 'GXUGG',13,10,'$'
+Sumajor	DB 'CSGG',13,10,'$'
 .code
 .startup
         MOV AX,0

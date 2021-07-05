@@ -1,6 +1,8 @@
 #include <stdio.h>
 struct student{
     char* name; // 姓名
+    char* college;
+    char* major;
     int num; // 学号
     int age; // 年龄
     float score;
@@ -9,13 +11,18 @@ int main(){
     int i = 0;
     int num_140=0;
     float sum=0;
-    student Li={"Li ping",5,18,145.0};
-    if(Li.score<140) {
+    student Su={"yi fan GG","GXUGG","CSGG",5,21,145.0};
+    if(Su.score < 140) {
         flag = -1;
     }
     else {
         flag=1;
     }
-    // printf("%d\n",flag);
-    // printf("%s\n",Li.name);
+    printf("%s\n",Su.name);
+    printf("%s\n",Su.college);
+    printf("%s\n",Su.major);
+    printf("%d\n",Su.num);
+    printf("%d\n",Su.age);
+    printf("%d\n",Su.score);
+    printf("%d\n",flag);
 }
