@@ -35,23 +35,14 @@ def trans():
     result += [(".data")]
     result += [(tab + "DW 100 DUP(0)")]
     const = []
-    temp = []
     for i in range(len(four)):
         if four[i][2] == "常量":
             result += [(four[i][3] + "\tDB " + "'" +four[i][1] + "',13,10,'$'")]
             const += [four[i][3]]
-            temp += [i] # 保存所有为常量的四元式
-    # 删除为字符串常量的四元式
-    # for i in temp:
-    #     four.pop(i)
+
     result += [(".code")]
     result += [(".startup")]
 
-    count = 0
-    for i in four:
-        print(count, end="\t")
-        print(i)
-        count = count + 1
 
     n = 0
     for line in four:
