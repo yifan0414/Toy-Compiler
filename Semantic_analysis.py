@@ -1,6 +1,6 @@
 import Parser
 
-global Parser_r1, Parser_r2,temp,four,key, structTable, count, structID
+global Parser_r1, Parser_r2,temp,four,key, structTable, count, structID, structSet, currentStruct
 def goon(a):
     global Parser_r1, Parser_r2, temp
     print()
@@ -574,12 +574,13 @@ def fun_55():
     goon(2)
     temp = temp[:-1]
 
-# <struct定义语句> ::= <struct> <structID> <{> <语句列表> <}> <;>
+# <struct定义语句> ::= <struct> <structID> <{> <struct变量定义> <}> <;>
 def fun_56():
-    global Parser_r1, Parser_r2, temp
+    global Parser_r1, Parser_r2, temp, structSet
     Parser_r1 = Parser_r1[1:]
     goon(2)
     goon(2)
+    structSet += [temp[-1][1]] # 多个结构体的数据类型
     goon(2)
     goon(1) # 语句列表
     goon(2)
@@ -597,13 +598,15 @@ def fun_57():
 
 # <struct声明语句> ::= <structID> <标识符> <=> <{> <struct常量> <}> <;>
 def fun_58():
-    global Parser_r1, Parser_r2, temp, four, structID
+    global Parser_r1, Parser_r2, temp, four, structID, count, currentStruct
     Parser_r1 = Parser_r1[1:]
     goon(2) # structID
+    currentStruct = temp[-1][1]
     goon(1) # 标识符
     structID = temp[-1][1] # 这里保存标识符
     goon(2) # =
     goon(2) # {
+    count = 0
     goon(1) # <struct常量>
     goon(2) # }
     goon(2) # ;
@@ -616,12 +619,15 @@ def fun_59():
     goon(2)
 # <struct变量定义> ::= <数据类型> <标识符> <;> <struct变量定义>
 def fun_60():
-    global Parser_r1, Parser_r2, temp, structTable
+    global Parser_r1, Parser_r2, temp, structTable, structSet
     Parser_r1 = Parser_r1[1:]
     goon(1)
     goon(1)
     # structTable[temp[-1][1]] = temp[-2][0]
-    structTable += [temp[-1][1]]
+    if structSet[-1] in structTable.keys():
+        structTable[structSet[-1]] += [temp[-1][1]]
+    else:
+        structTable[structSet[-1]] = [temp[-1][1]]
     goon(2)
     goon(1)
     temp = temp[:-4]
@@ -633,7 +639,7 @@ def fun_61():
 
 # < struct常量> ::= <常量> <struct分割符号> <struct常量>
 def fun_62():
-    global Parser_r1, Parser_r2, temp, structTable, four, count, structID
+    global Parser_r1, Parser_r2, temp, structTable, four, count, structID, currentStruct
     Parser_r1 = Parser_r1[1:]
     # k = ""
     # for i in range(temp):
@@ -641,9 +647,9 @@ def fun_62():
     #         k = temp[i + 1][1]
     goon(1)
     if temp[-1][0] == "STRING":
-        four += [('=', temp[-1][1], "常量", structID + structTable[count])]
+        four += [('=', temp[-1][1], "常量", structID + structTable[currentStruct][count])]
     else:
-        four += [('=', temp[-1][1], "_", structID + structTable[count])]
+        four += [('=', temp[-1][1], "_", structID + structTable[currentStruct][count])]
     count = count + 1
     goon(1)
     goon(1)
@@ -670,11 +676,14 @@ def fun_66():
     goon(2)
 
 def main():
-    global temp, Parser_r1, Parser_r2 ,ntemp, four, structTable, count, structID
+    global temp, Parser_r1, Parser_r2 ,ntemp, four, structTable, count, structID, structSet, currentStruct
+    structSet = [] # 结构体的数据类型
+    currentStruct = ""
     structID = ""
     count = 0
     four ,temp = [],[]
-    structTable = []
+    # structTable = []
+    structTable = {"":[]}
     ntemp = 0
     Parser_r1, Parser_r2 = Parser.main()
     print("******************    语 义 分 析  *******************")

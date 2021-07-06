@@ -40,14 +40,16 @@ def getFirst():
                 first[i] = [i]
             else:
                 first[i] = []
-
+    count = 0
     while(1):
+        count =count + 1
         f=0
         for line in grammer:
             k = 1
             test = first[line[0]].copy()
             for i in line[1:]:
                 k += 1
+                # 如果第一个符号的产生式不为空，则将其加入本产生式非终结符的first集中
                 if "空" not in first[i]:
                     first[line[0]] += first[i]
                     first[line[0]] = list(set(first[line[0]]))
@@ -61,9 +63,12 @@ def getFirst():
                     first[line[0]] += t
                     first[line[0]] = list(set(first[line[0]]))
             if len(test) != len(first[line[0]]):
+                # if line[0] == "struct定义语句":
+                #     print(first["数据类型"])
+                #     print(first[line[0]])
                 f = 1
         if not f:
-           break
+            break
 
 def getFollow():
     global follow
@@ -109,6 +114,7 @@ def getFollow():
                     f = 1
         if not f:
             break
+
 
 def getSelect():
     global select

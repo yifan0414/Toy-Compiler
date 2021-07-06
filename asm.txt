@@ -3,9 +3,12 @@ include io.inc
 .stack
 .data
         DW 100 DUP(0)
-Suname	DB 'yi fan GG',13,10,'$'
-Sucollege	DB 'GXUGG',13,10,'$'
-Sumajor	DB 'CSGG',13,10,'$'
+Suname	DB 'yi fan',13,10,'$'
+Sucollege	DB 'GXU',13,10,'$'
+Sumajor	DB 'CS',13,10,'$'
+Liname	DB 'Li fei',13,10,'$'
+Licollege	DB 'PKU',13,10,'$'
+Limajor	DB 'CS',13,10,'$'
 .code
 .startup
         MOV AX,0
@@ -20,6 +23,12 @@ Sumajor	DB 'CSGG',13,10,'$'
         MOV DS:[8],AX
         MOV AX,145
         MOV DS:[10],AX
+        MOV AX,5
+        MOV DS:[12],AX
+        MOV AX,21
+        MOV DS:[14],AX
+        MOV AX,150
+        MOV DS:[16],AX
         MOV AX,DS:[10]
         MOV BX,140
         CMP AX,BX
@@ -27,26 +36,26 @@ Sumajor	DB 'CSGG',13,10,'$'
 
 CODE1:
         MOV AX,0
-        MOV DS:[12],AX
+        MOV DS:[18],AX
         JMP CODE3
 
 CODE2:
         MOV AX,1
-        MOV DS:[12],AX
+        MOV DS:[18],AX
 CODE3:
-        MOV AX,DS:[12]
+        MOV AX,DS:[18]
         MOV BX,0
         CMP AX,BX
         JE CODE5
 
 CODE4:
         MOV AX,-1
-        MOV DS:[16],AX
+        MOV DS:[22],AX
         JMP CODE6
 
 CODE5:
         MOV AX,1
-        MOV DS:[16],AX
+        MOV DS:[22],AX
 CODE6:
         MOV DX,OFFSET Suname
         MOV AH,9
@@ -66,7 +75,25 @@ CODE6:
         MOV AX,DS:[10]
         call dispuib
         call dispcrlf
+        MOV DX,OFFSET Liname
+        MOV AH,9
+        INT 21H
+        MOV DX,OFFSET Licollege
+        MOV AH,9
+        INT 21H
+        MOV DX,OFFSET Limajor
+        MOV AH,9
+        INT 21H
+        MOV AX,DS:[12]
+        call dispuib
+        call dispcrlf
+        MOV AX,DS:[14]
+        call dispuib
+        call dispcrlf
         MOV AX,DS:[16]
+        call dispuib
+        call dispcrlf
+        MOV AX,DS:[22]
         call dispuib
         call dispcrlf
 
