@@ -69,6 +69,8 @@ def getFirst():
                 f = 1
         if not f:
             break
+        if count > 1000:
+            break
 
 def getFollow():
     global follow

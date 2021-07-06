@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="531b1a14-2db4-4445-bb81-4e79f3e14535" name="Default" comment="修改README">
+    <list default="true" id="531b1a14-2db4-4445-bb81-4e79f3e14535" name="Default" comment="可以定义多个struct变量">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Code.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.py" afterDir="false" />
@@ -217,9 +217,9 @@
       <list>
         <item itemvalue="Python.Trans_to_assembly" />
         <item itemvalue="Python.Semantic_analysis" />
-        <item itemvalue="Python.ttt" />
         <item itemvalue="Python.Parser" />
         <item itemvalue="Python.Lexical_analysis" />
+        <item itemvalue="Python.ttt" />
       </list>
     </recent_temporary>
   </component>
@@ -245,7 +245,7 @@
       <workItem from="1625410635706" duration="89000" />
       <workItem from="1625451979433" duration="13355000" />
       <workItem from="1625582176851" duration="3993000" />
-      <workItem from="1625586245446" duration="2145000" />
+      <workItem from="1625586245446" duration="3563000" />
     </task>
     <task id="LOCAL-00001" summary="完成输入输出语句，以及dowhile循环">
       <created>1625338906332</created>
@@ -282,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625468691899</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="可以定义多个struct变量">
+      <created>1625588679622</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1625588679622</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -341,7 +348,8 @@
     <MESSAGE value="重构struct结构体，可以任意增加变量，改变名字" />
     <MESSAGE value="添加README" />
     <MESSAGE value="修改README" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改README" />
+    <MESSAGE value="可以定义多个struct变量" />
+    <option name="LAST_COMMIT_MESSAGE" value="可以定义多个struct变量" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -358,7 +366,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Semantic_analysis.py</url>
-          <line>627</line>
+          <line>628</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
@@ -378,10 +386,10 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Compiler$Trans_to_assembly.coverage" NAME="Trans_to_assembly Coverage Results" MODIFIED="1625588299138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Compiler$Semantic_analysis.coverage" NAME="Semantic_analysis Coverage Results" MODIFIED="1625588269349" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Compiler$Parser.coverage" NAME="Parser Coverage Results" MODIFIED="1625585701644" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Compiler$Lexical_analysis.coverage" NAME="Lexical_analysis Coverage Results" MODIFIED="1625583717184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Compiler$Trans_to_assembly.coverage" NAME="Trans_to_assembly Coverage Results" MODIFIED="1625589526417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Compiler$Semantic_analysis.coverage" NAME="Semantic_analysis Coverage Results" MODIFIED="1625589067910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Compiler$Parser.coverage" NAME="Parser Coverage Results" MODIFIED="1625588904489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Compiler$Lexical_analysis.coverage" NAME="Lexical_analysis Coverage Results" MODIFIED="1625588755579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Lexical_analysis.py">

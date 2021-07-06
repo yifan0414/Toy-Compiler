@@ -7,7 +7,7 @@ Suname	DB 'yi fan',13,10,'$'
 Sucollege	DB 'GXU',13,10,'$'
 Sumajor	DB 'CS',13,10,'$'
 Liname	DB 'Li fei',13,10,'$'
-Licollege	DB 'PKU',13,10,'$'
+Licollege	DB 'GXU',13,10,'$'
 Limajor	DB 'CS',13,10,'$'
 .code
 .startup
@@ -27,7 +27,7 @@ Limajor	DB 'CS',13,10,'$'
         MOV DS:[12],AX
         MOV AX,21
         MOV DS:[14],AX
-        MOV AX,150
+        MOV AX,145
         MOV DS:[16],AX
         MOV AX,DS:[10]
         MOV BX,140
@@ -63,12 +63,6 @@ CODE6:
         MOV DX,OFFSET Sucollege
         MOV AH,9
         INT 21H
-        MOV DX,OFFSET Sumajor
-        MOV AH,9
-        INT 21H
-        MOV AX,DS:[6]
-        call dispuib
-        call dispcrlf
         MOV AX,DS:[8]
         call dispuib
         call dispcrlf
@@ -81,18 +75,6 @@ CODE6:
         MOV DX,OFFSET Licollege
         MOV AH,9
         INT 21H
-        MOV DX,OFFSET Limajor
-        MOV AH,9
-        INT 21H
-        MOV AX,DS:[12]
-        call dispuib
-        call dispcrlf
-        MOV AX,DS:[14]
-        call dispuib
-        call dispcrlf
-        MOV AX,DS:[16]
-        call dispuib
-        call dispcrlf
         MOV AX,DS:[22]
         call dispuib
         call dispcrlf

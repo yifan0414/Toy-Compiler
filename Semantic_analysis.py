@@ -585,7 +585,8 @@ def fun_56():
     goon(1) # 语句列表
     goon(2)
     goon(2)
-    temp = temp[:-6]
+    goon(1)
+    temp = temp[:-7]
     temp += [("struct定义语句", -1, -1)]
     return 0
 # < 语句 > ::= <struct声明语句>
@@ -602,11 +603,11 @@ def fun_58():
     Parser_r1 = Parser_r1[1:]
     goon(2) # structID
     currentStruct = temp[-1][1]
+    count = 0
     goon(1) # 标识符
     structID = temp[-1][1] # 这里保存标识符
     goon(2) # =
     goon(2) # {
-    count = 0
     goon(1) # <struct常量>
     goon(2) # }
     goon(2) # ;
@@ -651,6 +652,7 @@ def fun_62():
     else:
         four += [('=', temp[-1][1], "_", structID + structTable[currentStruct][count])]
     count = count + 1
+    print(count)
     goon(1)
     goon(1)
 # < struct常量> ::= <空>
@@ -674,6 +676,10 @@ def fun_66():
     global Parser_r1, Parser_r2, temp, structTable, four, count
     Parser_r1 = Parser_r1[1:]
     goon(2)
+
+def fun_67():
+    global Parser_r1, Parser_r2, temp, structTable, four, count
+    Parser_r1 = Parser_r1[1:]
 
 def main():
     global temp, Parser_r1, Parser_r2 ,ntemp, four, structTable, count, structID, structSet, currentStruct
