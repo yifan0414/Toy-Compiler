@@ -9,7 +9,7 @@ def goon(a):
     print(temp)
     if a == 1: # 对应非终结符，进入下一个产生式
         b = Parser_r1[0]
-        str1 = "fun_" + str(b) + "()"
+        str1 = "fun_" + str(b) + "()" # "fun_4"
         return eval(str1)
     else: # 目前匹配的符号，终结符
         temp += [ Parser_r2[0]]
@@ -55,7 +55,7 @@ def fun_3():
     Parser_r1 = Parser_r1[1:]
     goon(2)
     return 0
-
+# < 标识符 >::= <ID>
 def fun_4():
     global Parser_r1, Parser_r2, temp
     Parser_r1 = Parser_r1[1:]
@@ -204,6 +204,7 @@ def fun_21():
         print(("=", temp[-1][1], "_", temp[-2][1]))
         four += [("=", temp[-1][1], "_", temp[-2][1])]
         # 对于 a = 10来说，temp[-1][1] = 10, temp[-2][1] = a
+        # 这是因为在对于常量的非终结扩展函数来说，已经把 "=" 去掉了
     temp = temp[:-2]
     temp += [("赋值语句2", -1, -1)]
     return 0
@@ -261,7 +262,7 @@ def fun_25():
             four += [(str(temp[-3][1]), temp[-2][1], temp[-1][1], len(four) + 3)]
 
     print(temp)
-    temp[-2] = temp[-1]
+    temp[-2] = temp[-1] # 去掉冗余信息
     temp = temp[:-1]
     return 0
 
@@ -271,9 +272,9 @@ def fun_26():
     Parser_r1 = Parser_r1[1:]
     goon(1)
     goon(1)
-    print((temp[-2][1],temp[-3][1],temp[-1][1],"t"+str(ntemp)))
-    four +=[(temp[-2][1],temp[-3][1],temp[-1][1],"t"+str(ntemp))]
-    temp = temp[:-2]
+    print((temp[-2][1],temp[-3][1],temp[-1][1],"t"+str(ntemp))) # temp[-2] 是运算符，temp[-3]是左项，temp[-1]是右项
+    four +=[(temp[-2][1],temp[-3][1],temp[-1][1],"t"+str(ntemp))] # 临时变量t
+    temp = temp[:-2] # 留下一个左项，用于下面的词素构造
     temp += [(temp[-1][0], "t"+str(ntemp), temp[-1][2])]
     ntemp +=1
     return 0
@@ -282,7 +283,7 @@ def fun_27():
     global Parser_r1, Parser_r2, temp
     Parser_r1 = Parser_r1[1:]
     return 0
-
+# <左项> ::= <常量>
 def fun_28():
     global Parser_r1, Parser_r2, temp
     Parser_r1 = Parser_r1[1:]
@@ -303,19 +304,19 @@ def fun_30():
     temp[-2] = temp[-1]
     temp = temp[:-1]
     return 0
-
+# <左项1> ::= <空>
 def fun_31():
     global Parser_r1, Parser_r2, temp
     Parser_r1 = Parser_r1[1:]
     temp += [temp[-1]]
     return 0
-
+# <左项1>::=<运算符> <右项>
 def fun_32():
     global Parser_r1, Parser_r2, temp,four,ntemp
     Parser_r1 = Parser_r1[1:]
     goon(1)
     goon(1)
-    print((temp[-2][1],temp[-3][1],temp[-1][1],"t"+str(ntemp)))
+    print((temp[-2][1],temp[-3][1],temp[-1][1],"t"+str(ntemp))) # 构造临时变量
     four+=[(temp[-2][1],temp[-3][1],temp[-1][1],"t"+str(ntemp))]
     temp = temp[:-2]
     temp += [(temp[-1][0],"t"+str(ntemp), temp[-1][2])]
@@ -351,20 +352,21 @@ def fun_36():
 def fun_37():
     global Parser_r1, Parser_r2, temp, ntemp, four
     Parser_r1 = Parser_r1[1:]
-    goon(2)
-    goon(2)
-    goon(1)
+    goon(2) # if
+    goon(2) # (
+    goon(1) # 条件式
     print(("j==", temp[-1][1], 0, "to"))
-    four += [("j==", temp[-1][1], 0, "to")]
-    k = len(four)
-    goon(2)
-    goon(2)
-    goon(1)
-    four += [("j","_","_","to")]
+    four += [("j==", temp[-1][1], 0, "to")] # 构造四元式，跳到 else 执行语句的四元式
+    k = len(four) # 记录当前标号
+    goon(2) # )
+    goon(2) # {
+    goon(1) # 语句列表
+    four += [("j","_","_","to")] # if语句执行结束，跳过所用的else，等待回填
     four[k - 1] = (four[k-1][0], four[k-1][1], four[k-1][2], len(four))
     k = len(four)
     goon(2)
-    goon(1)
+    goon(1) # 条件语句2，整个 if else 结束，填充 等待回填的四元式
+    # 这里没有实现 if elseif else 语句，所以与switch case不同，不需要遍历四元式，填充所有的 to
     four[k - 1] = (four[k - 1][0], four[k - 1][1], four[k - 1][2], len(four))
     temp = temp[:-8]
     temp += [("条件语句",1,-1)]
@@ -463,7 +465,7 @@ def fun_44():
     four+=[("SCANF",temp[-3][1],"_","_")]
     temp=temp[:-7]
     return 0
-
+# < 输出语句 > ::= <printf> <(>< STRING> <,> <标识符> <)><;>
 def fun_45():
     global Parser_r1, Parser_r2, temp,four
     Parser_r1 = Parser_r1[1:]

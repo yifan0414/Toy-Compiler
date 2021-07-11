@@ -297,7 +297,7 @@ def scanner():
         lexical_error("unknown character: " + current_char)
 
 
-def main( ):
+def main():
     file_name = "Code.txt"
     read_source_file(file_name)
     global result

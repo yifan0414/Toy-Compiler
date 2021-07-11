@@ -3,12 +3,12 @@ include io.inc
 .stack
 .data
         DW 100 DUP(0)
-Suname	DB 'yi fan',13,10,'$'
-Sucollege	DB 'GXU',13,10,'$'
-Sumajor	DB 'CS',13,10,'$'
-Liname	DB 'Li fei',13,10,'$'
+Liname	DB 'Li ping',13,10,'$'
 Licollege	DB 'GXU',13,10,'$'
 Limajor	DB 'CS',13,10,'$'
+Wangname	DB 'Wang ping',13,10,'$'
+Wangcollege	DB 'GXU',13,10,'$'
+Wangmajor	DB 'CS',13,10,'$'
 .code
 .startup
         MOV AX,0
@@ -30,55 +30,15 @@ Limajor	DB 'CS',13,10,'$'
         MOV AX,145
         MOV DS:[16],AX
         MOV AX,DS:[10]
-        MOV BX,140
-        CMP AX,BX
-        JL CODE2
+        MOV BX,DS:[16]
+        ADD AX,BX
+        MOV DS:[18],AX
+        MOV AX,DS:[18]
+        MOV DS:[4],AX
+        MOV AX,DS:[4]
+        call dispuib
+        call dispcrlf
 
 CODE1:
-        MOV AX,0
-        MOV DS:[18],AX
-        JMP CODE3
-
-CODE2:
-        MOV AX,1
-        MOV DS:[18],AX
-CODE3:
-        MOV AX,DS:[18]
-        MOV BX,0
-        CMP AX,BX
-        JE CODE5
-
-CODE4:
-        MOV AX,-1
-        MOV DS:[22],AX
-        JMP CODE6
-
-CODE5:
-        MOV AX,1
-        MOV DS:[22],AX
-CODE6:
-        MOV DX,OFFSET Suname
-        MOV AH,9
-        INT 21H
-        MOV DX,OFFSET Sucollege
-        MOV AH,9
-        INT 21H
-        MOV AX,DS:[8]
-        call dispuib
-        call dispcrlf
-        MOV AX,DS:[10]
-        call dispuib
-        call dispcrlf
-        MOV DX,OFFSET Liname
-        MOV AH,9
-        INT 21H
-        MOV DX,OFFSET Licollege
-        MOV AH,9
-        INT 21H
-        MOV AX,DS:[22]
-        call dispuib
-        call dispcrlf
-
-CODE7:
 .exit
 END

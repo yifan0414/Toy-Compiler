@@ -75,10 +75,16 @@ def trans():
             if four[i][2] == "常量":
                 continue
             elif isinstance(four[i][1],int) or isinstance(four[i][1],float):
+                # a b c -1 -1 -1 -1 -1 -1
+                # MOV AX, 0
+                # MOV DS:[6], AX
                 data[data.index(-1)] = four[i][3]
                 result += [tab+"MOV AX,"+ str(four[i][1])]
                 result += [tab+"MOV DS:["+str(2*data.index(four[i][3]))+"],AX"]
-            else:
+            else: # 变量赋值给变量
+                # b = a
+                # MOV AX, DS:[index(a)]
+                # MOV DS:[index(b)], AX
                 data[data.index(-1)] = four[i][3]
                 result += [tab+"MOV AX,DS:[" + str(2*data.index(four[i][1]))+"]"]
                 result += [tab+"MOV DS:[" + str(2 * data.index(four[i][3])) + "],AX"]
@@ -118,7 +124,7 @@ def trans():
                 # result +=[tab+"INT 21h"]
                 #result += [tab + "mov ax,dx"]
                 result += [tab + "MOV AX,DS:[" + str(2 * data.index(four[i][1])) + "]"]
-                result += [tab + "call dispuib"]
+                result += [tab + "call dispsiw"]
                 result += [tab + "call dispcrlf"]
         elif rule[four[i][0]][0] == "输入":
             result +=[tab+"call readuiw"]

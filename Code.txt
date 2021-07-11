@@ -7,27 +7,12 @@ struct stu{
     int age; // 年龄
     float score;
 };
-struct teacher{
-    char* name;
-    char* college;
-};
 int main(){
     int i = 0;
     int num_140=0;
     float sum=0;
-    stu Su={"yi fan","GXU","CS",5,21,145.0};
-    stu Li={"Li fei","GXU","CS",5,21,145.0};
-    if(Su.score < 140) {
-        flag = -1;
-    }
-    else {
-        flag=1;
-    }
-    printf("%s\n",Su.name);
-    printf("%s\n",Su.college);
-    printf("%d\n",Su.age);
-    printf("%d\n",Su.score);
-    printf("%s\n",Li.name);
-    printf("%s\n",Li.college);
-    printf("%d\n",flag);
+    stu Li={"Li ping","GXU","CS",5,21,145.0};
+    stu Wang={"Wang ping","GXU","CS",5,21,145.0};
+    sum = Li.score + Wang.score;
+    printf("%f", sum);
 }
